@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hs.dcl.test.dao.IncentiveObjMapper" >
+
+    <resultMap id="BaseResultMap" type="hs.dcl.test.model.IncentiveObj" >
+        <id column="object_id" property="objectId" jdbcType="INTEGER" />
+        <result column="object_name" property="objectName" jdbcType="VARCHAR" />
+        <result column="mobile_tel" property="mobileTel" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="cre_type" property="creType" jdbcType="VARCHAR" />
+        <result column="cre_no" property="creNo" jdbcType="VARCHAR" />
+        <result column="employee_id" property="employeeId" jdbcType="INTEGER" />
+        <result column="fund_account" property="fundAccount" jdbcType="VARCHAR" />
+        <result column="sha_account" property="shaAccount" jdbcType="VARCHAR" />
+        <result column="resident_status" property="residentStatus" jdbcType="CHAR" />
+        <result column="account_status" property="accountStatus" jdbcType="CHAR" />
+        <result column="employee_type" property="employeeType" jdbcType="VARCHAR" />
+        <result column="audit_status" property="auditStatus" jdbcType="CHAR" />
+        <result column="branch_no" property="branchNo" jdbcType="INTEGER" />
+        <result column="branch_name" property="branchName" jdbcType="VARCHAR" />
+        <result column="online_status" property="onlineStatus" jdbcType="CHAR" />
+        <result column="depository_bank_no" property="depositoryBankNo" jdbcType="VARCHAR" />
+        <result column="depository_bank" property="depositoryBank" jdbcType="VARCHAR" />
+        <result column="retrustee_status" property="retrusteeStatus" jdbcType="CHAR" />
+        <result column="revoke_status" property="revokeStatus" jdbcType="CHAR" />
+        <result column="changeable_status" property="changeableStatus" jdbcType="CHAR" />
+        <result column="deal_bond_status" property="dealBondStatus" jdbcType="CHAR" />
+        <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+        <result column="crea_time" property="creaTime" jdbcType="TIMESTAMP" />
+        <result column="upda_time" property="updaTime" jdbcType="TIMESTAMP" />
+        <result column="last_modifier" property="lastModifier" jdbcType="INTEGER" />
+        <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        object_id, object_name, mobile_tel, email, cre_type, cre_no, employee_id, fund_account, 
+        sha_account, resident_status, account_status, employee_type, audit_status, branch_no, 
+        branch_name, online_status, depository_bank_no, depository_bank, retrustee_status, 
+        revoke_status, changeable_status, deal_bond_status, org_id, crea_time, upda_time, 
+        last_modifier, creator_id
+    </sql>
+
+    <select id="selectAll" resultMap="BaseResultMap" >
+        select
+        *
+        from incentive_obj
+        where object_id = 1
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from incentive_obj
+        where object_id = #{objectId,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from incentive_obj
+        where object_id = #{objectId,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="hs.dcl.test.model.IncentiveObj" >
+        delete from incentive_obj
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="hs.dcl.test.model.IncentiveObj" >
+        insert into incentive_obj (object_id, object_name, mobile_tel, 
+            email, cre_type, cre_no, 
+            employee_id, fund_account, sha_account, 
+            resident_status, account_status, employee_type, 
+            audit_status, branch_no, branch_name, 
+            online_status, depository_bank_no, depository_bank, 
+            retrustee_status, revoke_status, changeable_status, 
+            deal_bond_status, org_id, crea_time, 
+            upda_time, last_modifier, creator_id
+            )
+        values (#{objectId,jdbcType=INTEGER}, #{objectName,jdbcType=VARCHAR}, #{mobileTel,jdbcType=VARCHAR}, 
+            #{email,jdbcType=VARCHAR}, #{creType,jdbcType=VARCHAR}, #{creNo,jdbcType=VARCHAR}, 
+            #{employeeId,jdbcType=INTEGER}, #{fundAccount,jdbcType=VARCHAR}, #{shaAccount,jdbcType=VARCHAR}, 
+            #{residentStatus,jdbcType=CHAR}, #{accountStatus,jdbcType=CHAR}, #{employeeType,jdbcType=VARCHAR}, 
+            #{auditStatus,jdbcType=CHAR}, #{branchNo,jdbcType=INTEGER}, #{branchName,jdbcType=VARCHAR}, 
+            #{onlineStatus,jdbcType=CHAR}, #{depositoryBankNo,jdbcType=VARCHAR}, #{depositoryBank,jdbcType=VARCHAR}, 
+            #{retrusteeStatus,jdbcType=CHAR}, #{revokeStatus,jdbcType=CHAR}, #{changeableStatus,jdbcType=CHAR}, 
+            #{dealBondStatus,jdbcType=CHAR}, #{orgId,jdbcType=VARCHAR}, #{creaTime,jdbcType=TIMESTAMP}, 
+            #{updaTime,jdbcType=TIMESTAMP}, #{lastModifier,jdbcType=INTEGER}, #{creatorId,jdbcType=INTEGER}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="hs.dcl.test.model.IncentiveObj" >
+        insert into incentive_obj
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="objectId != null" >
+                object_id,
+            </if>
+            <if test="objectName != null" >
+                object_name,
+            </if>
+            <if test="mobileTel != null" >
+                mobile_tel,
+            </if>
+            <if test="email != null" >
+                email,
+            </if>
+            <if test="creType != null" >
+                cre_type,
+            </if>
+            <if test="creNo != null" >
+                cre_no,
+            </if>
+            <if test="employeeId != null" >
+                employee_id,
+            </if>
+            <if test="fundAccount != null" >
+                fund_account,
+            </if>
+            <if test="shaAccount != null" >
+                sha_account,
+            </if>
+            <if test="residentStatus != null" >
+                resident_status,
+            </if>
+            <if test="accountStatus != null" >
+                account_status,
+            </if>
+            <if test="employeeType != null" >
+                employee_type,
+            </if>
+            <if test="auditStatus != null" >
+                audit_status,
+            </if>
+            <if test="branchNo != null" >
+                branch_no,
+            </if>
+            <if test="branchName != null" >
+                branch_name,
+            </if>
+            <if test="onlineStatus != null" >
+                online_status,
+            </if>
+            <if test="depositoryBankNo != null" >
+                depository_bank_no,
+            </if>
+            <if test="depositoryBank != null" >
+                depository_bank,
+            </if>
+            <if test="retrusteeStatus != null" >
+                retrustee_status,
+            </if>
+            <if test="revokeStatus != null" >
+                revoke_status,
+            </if>
+            <if test="changeableStatus != null" >
+                changeable_status,
+            </if>
+            <if test="dealBondStatus != null" >
+                deal_bond_status,
+            </if>
+            <if test="orgId != null" >
+                org_id,
+            </if>
+            <if test="creaTime != null" >
+                crea_time,
+            </if>
+            <if test="updaTime != null" >
+                upda_time,
+            </if>
+            <if test="lastModifier != null" >
+                last_modifier,
+            </if>
+            <if test="creatorId != null" >
+                creator_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="objectId != null" >
+                #{objectId,jdbcType=INTEGER},
+            </if>
+            <if test="objectName != null" >
+                #{objectName,jdbcType=VARCHAR},
+            </if>
+            <if test="mobileTel != null" >
+                #{mobileTel,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="creType != null" >
+                #{creType,jdbcType=VARCHAR},
+            </if>
+            <if test="creNo != null" >
+                #{creNo,jdbcType=VARCHAR},
+            </if>
+            <if test="employeeId != null" >
+                #{employeeId,jdbcType=INTEGER},
+            </if>
+            <if test="fundAccount != null" >
+                #{fundAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="shaAccount != null" >
+                #{shaAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="residentStatus != null" >
+                #{residentStatus,jdbcType=CHAR},
+            </if>
+            <if test="accountStatus != null" >
+                #{accountStatus,jdbcType=CHAR},
+            </if>
+            <if test="employeeType != null" >
+                #{employeeType,jdbcType=VARCHAR},
+            </if>
+            <if test="auditStatus != null" >
+                #{auditStatus,jdbcType=CHAR},
+            </if>
+            <if test="branchNo != null" >
+                #{branchNo,jdbcType=INTEGER},
+            </if>
+            <if test="branchName != null" >
+                #{branchName,jdbcType=VARCHAR},
+            </if>
+            <if test="onlineStatus != null" >
+                #{onlineStatus,jdbcType=CHAR},
+            </if>
+            <if test="depositoryBankNo != null" >
+                #{depositoryBankNo,jdbcType=VARCHAR},
+            </if>
+            <if test="depositoryBank != null" >
+                #{depositoryBank,jdbcType=VARCHAR},
+            </if>
+            <if test="retrusteeStatus != null" >
+                #{retrusteeStatus,jdbcType=CHAR},
+            </if>
+            <if test="revokeStatus != null" >
+                #{revokeStatus,jdbcType=CHAR},
+            </if>
+            <if test="changeableStatus != null" >
+                #{changeableStatus,jdbcType=CHAR},
+            </if>
+            <if test="dealBondStatus != null" >
+                #{dealBondStatus,jdbcType=CHAR},
+            </if>
+            <if test="orgId != null" >
+                #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creaTime != null" >
+                #{creaTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updaTime != null" >
+                #{updaTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifier != null" >
+                #{lastModifier,jdbcType=INTEGER},
+            </if>
+            <if test="creatorId != null" >
+                #{creatorId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample"  resultType="java.lang.Integer" >
+        select count(*) from incentive_obj
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update incentive_obj
+        <set >
+            <if test="record.objectId != null" >
+                object_id = #{record.objectId,jdbcType=INTEGER},
+            </if>
+            <if test="record.objectName != null" >
+                object_name = #{record.objectName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.mobileTel != null" >
+                mobile_tel = #{record.mobileTel,jdbcType=VARCHAR},
+            </if>
+            <if test="record.email != null" >
+                email = #{record.email,jdbcType=VARCHAR},
+            </if>
+            <if test="record.creType != null" >
+                cre_type = #{record.creType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.creNo != null" >
+                cre_no = #{record.creNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.employeeId != null" >
+                employee_id = #{record.employeeId,jdbcType=INTEGER},
+            </if>
+            <if test="record.fundAccount != null" >
+                fund_account = #{record.fundAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="record.shaAccount != null" >
+                sha_account = #{record.shaAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="record.residentStatus != null" >
+                resident_status = #{record.residentStatus,jdbcType=CHAR},
+            </if>
+            <if test="record.accountStatus != null" >
+                account_status = #{record.accountStatus,jdbcType=CHAR},
+            </if>
+            <if test="record.employeeType != null" >
+                employee_type = #{record.employeeType,jdbcType=VARCHAR},
+            </if>
+            <if test="record.auditStatus != null" >
+                audit_status = #{record.auditStatus,jdbcType=CHAR},
+            </if>
+            <if test="record.branchNo != null" >
+                branch_no = #{record.branchNo,jdbcType=INTEGER},
+            </if>
+            <if test="record.branchName != null" >
+                branch_name = #{record.branchName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.onlineStatus != null" >
+                online_status = #{record.onlineStatus,jdbcType=CHAR},
+            </if>
+            <if test="record.depositoryBankNo != null" >
+                depository_bank_no = #{record.depositoryBankNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.depositoryBank != null" >
+                depository_bank = #{record.depositoryBank,jdbcType=VARCHAR},
+            </if>
+            <if test="record.retrusteeStatus != null" >
+                retrustee_status = #{record.retrusteeStatus,jdbcType=CHAR},
+            </if>
+            <if test="record.revokeStatus != null" >
+                revoke_status = #{record.revokeStatus,jdbcType=CHAR},
+            </if>
+            <if test="record.changeableStatus != null" >
+                changeable_status = #{record.changeableStatus,jdbcType=CHAR},
+            </if>
+            <if test="record.dealBondStatus != null" >
+                deal_bond_status = #{record.dealBondStatus,jdbcType=CHAR},
+            </if>
+            <if test="record.orgId != null" >
+                org_id = #{record.orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.creaTime != null" >
+                crea_time = #{record.creaTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updaTime != null" >
+                upda_time = #{record.updaTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.lastModifier != null" >
+                last_modifier = #{record.lastModifier,jdbcType=INTEGER},
+            </if>
+            <if test="record.creatorId != null" >
+                creator_id = #{record.creatorId,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update incentive_obj
+        set object_id = #{record.objectId,jdbcType=INTEGER},
+            object_name = #{record.objectName,jdbcType=VARCHAR},
+            mobile_tel = #{record.mobileTel,jdbcType=VARCHAR},
+            email = #{record.email,jdbcType=VARCHAR},
+            cre_type = #{record.creType,jdbcType=VARCHAR},
+            cre_no = #{record.creNo,jdbcType=VARCHAR},
+            employee_id = #{record.employeeId,jdbcType=INTEGER},
+            fund_account = #{record.fundAccount,jdbcType=VARCHAR},
+            sha_account = #{record.shaAccount,jdbcType=VARCHAR},
+            resident_status = #{record.residentStatus,jdbcType=CHAR},
+            account_status = #{record.accountStatus,jdbcType=CHAR},
+            employee_type = #{record.employeeType,jdbcType=VARCHAR},
+            audit_status = #{record.auditStatus,jdbcType=CHAR},
+            branch_no = #{record.branchNo,jdbcType=INTEGER},
+            branch_name = #{record.branchName,jdbcType=VARCHAR},
+            online_status = #{record.onlineStatus,jdbcType=CHAR},
+            depository_bank_no = #{record.depositoryBankNo,jdbcType=VARCHAR},
+            depository_bank = #{record.depositoryBank,jdbcType=VARCHAR},
+            retrustee_status = #{record.retrusteeStatus,jdbcType=CHAR},
+            revoke_status = #{record.revokeStatus,jdbcType=CHAR},
+            changeable_status = #{record.changeableStatus,jdbcType=CHAR},
+            deal_bond_status = #{record.dealBondStatus,jdbcType=CHAR},
+            org_id = #{record.orgId,jdbcType=VARCHAR},
+            crea_time = #{record.creaTime,jdbcType=TIMESTAMP},
+            upda_time = #{record.updaTime,jdbcType=TIMESTAMP},
+            last_modifier = #{record.lastModifier,jdbcType=INTEGER},
+            creator_id = #{record.creatorId,jdbcType=INTEGER}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="hs.dcl.test.model.IncentiveObj" >
+        update incentive_obj
+        <set >
+            <if test="objectName != null" >
+                object_name = #{objectName,jdbcType=VARCHAR},
+            </if>
+            <if test="mobileTel != null" >
+                mobile_tel = #{mobileTel,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null" >
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="creType != null" >
+                cre_type = #{creType,jdbcType=VARCHAR},
+            </if>
+            <if test="creNo != null" >
+                cre_no = #{creNo,jdbcType=VARCHAR},
+            </if>
+            <if test="employeeId != null" >
+                employee_id = #{employeeId,jdbcType=INTEGER},
+            </if>
+            <if test="fundAccount != null" >
+                fund_account = #{fundAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="shaAccount != null" >
+                sha_account = #{shaAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="residentStatus != null" >
+                resident_status = #{residentStatus,jdbcType=CHAR},
+            </if>
+            <if test="accountStatus != null" >
+                account_status = #{accountStatus,jdbcType=CHAR},
+            </if>
+            <if test="employeeType != null" >
+                employee_type = #{employeeType,jdbcType=VARCHAR},
+            </if>
+            <if test="auditStatus != null" >
+                audit_status = #{auditStatus,jdbcType=CHAR},
+            </if>
+            <if test="branchNo != null" >
+                branch_no = #{branchNo,jdbcType=INTEGER},
+            </if>
+            <if test="branchName != null" >
+                branch_name = #{branchName,jdbcType=VARCHAR},
+            </if>
+            <if test="onlineStatus != null" >
+                online_status = #{onlineStatus,jdbcType=CHAR},
+            </if>
+            <if test="depositoryBankNo != null" >
+                depository_bank_no = #{depositoryBankNo,jdbcType=VARCHAR},
+            </if>
+            <if test="depositoryBank != null" >
+                depository_bank = #{depositoryBank,jdbcType=VARCHAR},
+            </if>
+            <if test="retrusteeStatus != null" >
+                retrustee_status = #{retrusteeStatus,jdbcType=CHAR},
+            </if>
+            <if test="revokeStatus != null" >
+                revoke_status = #{revokeStatus,jdbcType=CHAR},
+            </if>
+            <if test="changeableStatus != null" >
+                changeable_status = #{changeableStatus,jdbcType=CHAR},
+            </if>
+            <if test="dealBondStatus != null" >
+                deal_bond_status = #{dealBondStatus,jdbcType=CHAR},
+            </if>
+            <if test="orgId != null" >
+                org_id = #{orgId,jdbcType=VARCHAR},
+            </if>
+            <if test="creaTime != null" >
+                crea_time = #{creaTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updaTime != null" >
+                upda_time = #{updaTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastModifier != null" >
+                last_modifier = #{lastModifier,jdbcType=INTEGER},
+            </if>
+            <if test="creatorId != null" >
+                creator_id = #{creatorId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where object_id = #{objectId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="hs.dcl.test.model.IncentiveObj" >
+        update incentive_obj
+        set object_name = #{objectName,jdbcType=VARCHAR},
+            mobile_tel = #{mobileTel,jdbcType=VARCHAR},
+            email = #{email,jdbcType=VARCHAR},
+            cre_type = #{creType,jdbcType=VARCHAR},
+            cre_no = #{creNo,jdbcType=VARCHAR},
+            employee_id = #{employeeId,jdbcType=INTEGER},
+            fund_account = #{fundAccount,jdbcType=VARCHAR},
+            sha_account = #{shaAccount,jdbcType=VARCHAR},
+            resident_status = #{residentStatus,jdbcType=CHAR},
+            account_status = #{accountStatus,jdbcType=CHAR},
+            employee_type = #{employeeType,jdbcType=VARCHAR},
+            audit_status = #{auditStatus,jdbcType=CHAR},
+            branch_no = #{branchNo,jdbcType=INTEGER},
+            branch_name = #{branchName,jdbcType=VARCHAR},
+            online_status = #{onlineStatus,jdbcType=CHAR},
+            depository_bank_no = #{depositoryBankNo,jdbcType=VARCHAR},
+            depository_bank = #{depositoryBank,jdbcType=VARCHAR},
+            retrustee_status = #{retrusteeStatus,jdbcType=CHAR},
+            revoke_status = #{revokeStatus,jdbcType=CHAR},
+            changeable_status = #{changeableStatus,jdbcType=CHAR},
+            deal_bond_status = #{dealBondStatus,jdbcType=CHAR},
+            org_id = #{orgId,jdbcType=VARCHAR},
+            crea_time = #{creaTime,jdbcType=TIMESTAMP},
+            upda_time = #{updaTime,jdbcType=TIMESTAMP},
+            last_modifier = #{lastModifier,jdbcType=INTEGER},
+            creator_id = #{creatorId,jdbcType=INTEGER}
+        where object_id = #{objectId,jdbcType=INTEGER}
+    </update>
+</mapper>

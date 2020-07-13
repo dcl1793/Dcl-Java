@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration status="WARN" >
+    <properties>
+        <!-- 文件输出格式 -->
+        <property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} |-%-5level [%thread] %c [%L] -| %msg%n</property>
+        <property>
+            <name>appName</name>
+            <value>test</value>
+        </property>
+    </properties>
+
+    <appenders>
+        <Console name="CONSOLE" target="system_out">
+            <PatternLayout pattern="${PATTERN}" />
+        </Console>
+
+        <RollingFile name="Bizlog" fileName="../log/${appName}.log" filePattern="../log/${appName}-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="${PATTERN}" />
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="250 MB" />
+            </Policies>
+        </RollingFile>
+
+        <Async name="AsyncBizlog">
+            <AppenderRef ref="Bizlog" />
+        </Async>
+
+        <Async name="AsyncCONSOLE">
+            <AppenderRef ref="CONSOLE" />
+        </Async>
+    </appenders>
+
+    <loggers>
+        <root level="info">
+            <AppenderRef ref="AsyncCONSOLE" />
+            <AppenderRef ref="AsyncBizlog" />
+        </root>
+    </loggers>
+</configuration>
