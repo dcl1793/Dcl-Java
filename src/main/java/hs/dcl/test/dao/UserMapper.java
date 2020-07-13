@@ -15,9 +15,5 @@ public interface UserMapper {
 
     List<User> selectUser(Page page);
 
-    /**
-     *
-     * @return
-     */
     Integer selectCountUser();
 }
