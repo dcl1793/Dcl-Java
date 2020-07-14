@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping(value = "/param")
-public class ParamTest {
+public class ControllerAnnotationController {
 
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public void getTest(@RequestParam User user){
