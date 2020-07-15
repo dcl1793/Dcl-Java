@@ -28,6 +28,7 @@ public class SplitStringUtil {
                 resultBuffer.append("|" + result);
             }
         }
+        String.join(",","urls");
         return resultBuffer.toString();
     }
 }

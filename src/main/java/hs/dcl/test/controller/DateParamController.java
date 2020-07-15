@@ -26,7 +26,7 @@ public class DateParamController {
     public DateParamVO exportExcel(DateParamVO dateParamVO){
 
         String endTime = dateParamVO.getEndTime();
-        String startTime = dateParamVO.getStartTime();
+        LocalDateTime startTime = dateParamVO.getStartTime();
         System.out.println(endTime+"--------"+startTime);
         DateParamVO outDto = new DateParamVO();
         Date now = new Date();

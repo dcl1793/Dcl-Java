@@ -1,6 +1,7 @@
 package hs.dcl.test.config;
 
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import lombok.NoArgsConstructor;
@@ -34,11 +35,14 @@ public class CustomJsonDeserializer {
     }
 
     public static class DateSort extends JsonDeserializer<LocalDateTime> {
+
         @Override
-        public LocalDateTime deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+        public LocalDateTime deserialize(JsonParser p, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
             String time = p.readValueAs(String.class);
             try {
-                return LocalDateTime.from(DATE_TIME_SORT.parse(time));
+
+                return LocalDateTime.from(DATE_TIME_FORMATTER.parse(time));
+
             } catch (Exception e) {
                 log.error("", e);
                 return null;
