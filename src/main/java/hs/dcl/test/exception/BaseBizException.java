@@ -1,4 +1,4 @@
-package hs.dcl.test.common;
+package hs.dcl.test.exception;
 
 import lombok.Data;
 

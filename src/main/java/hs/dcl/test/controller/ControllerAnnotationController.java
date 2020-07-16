@@ -20,7 +20,6 @@ public class ControllerAnnotationController {
 
     @RequestMapping(value = "/put", method = RequestMethod.PUT)
     public void putTest(@RequestParam("age") String name){
-        System.out.println("45555555555555555555");
         System.out.println(name);
     }
 

@@ -1,9 +1,9 @@
 package hs.dcl.test.service.impl;
 
-import hs.dcl.test.common.BaseBizException;
 import hs.dcl.test.common.ErrorEnum;
 import hs.dcl.test.common.Result;
 import hs.dcl.test.dao.UserMapper;
+import hs.dcl.test.exception.BaseBizException;
 import hs.dcl.test.model.Page;
 import hs.dcl.test.model.User;
 import hs.dcl.test.service.PageService;
@@ -42,23 +42,20 @@ public class PageServiceImpl implements PageService {
             List<User> list = userMapper.selectUser(page);
             pageHelper.setDataInfo(list);
             pageHelper.setTotalCount(totalNum);
-            return new Result(pageHelper);
+            return Result.success(pageHelper);
 
         }catch (Exception e) {
             logger.error(e.getMessage());
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return new Result(ErrorEnum.OPERATION_ERROR);
+            return Result.failed(ErrorEnum.OPERATION_ERROR);
         }
     }
 
     @Override
     public Result excepTest() {
 
-        int i = 0;
-        int j = 1/0;
-
-        return Result.okResult();
+        return Result.success();
     }
 
     /**
@@ -73,11 +70,11 @@ public class PageServiceImpl implements PageService {
         } catch (BaseBizException e) {
             logger.error(e.getMsg());
             e.printStackTrace();
-            Result result = new Result(ErrorEnum.SF_ERROR.getCode(), e.getMsg());
+            Result result = new Result(ErrorEnum.SF_ERROR.code(), e.getMsg());
             return result;
 
         }
-        return new Result(ErrorEnum.PARAM_NOT_NORMAL);
+        return new Result(ErrorEnum.PARAM_INVALID);
     }
 
 }

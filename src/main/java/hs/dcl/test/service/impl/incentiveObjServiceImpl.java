@@ -30,8 +30,7 @@ public class incentiveObjServiceImpl implements IncentiveObjService {
     @Override
     public Result getPersonDetail(Page page) {
 
-
         IncentiveObj incentiveObjs = incentiveObjMapper.selectAll();
-        return new Result(incentiveObjs);
+        return Result.success(incentiveObjs);
     }
 }
