@@ -25,12 +25,11 @@ public class DateParamController {
     @RequestMapping(value = "/param", method = RequestMethod.GET)
     public DateParamVO exportExcel(DateParamVO dateParamVO){
 
-        String endTime = dateParamVO.getEndTime();
         LocalDateTime startTime = dateParamVO.getStartTime();
-        System.out.println(endTime+"--------"+startTime);
-        DateParamVO outDto = new DateParamVO();
-        Date now = new Date();
-        outDto.setEndTime(now.toString());
-        return outDto;
+        System.out.println(startTime);
+
+        LocalDateTime now = LocalDateTime.now();
+        dateParamVO.setEndTime(now);
+        return dateParamVO;
     }
 }

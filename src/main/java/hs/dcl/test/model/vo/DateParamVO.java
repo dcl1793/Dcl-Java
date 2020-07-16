@@ -23,13 +23,14 @@ public class DateParamVO implements Serializable {
      * 开始时间
      */
     //入参使用(类型转化，将json类型转换为LocalDateTime，而不是将日期格式化)
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")//(表单)
-    @JsonDeserialize(using = CustomJsonDeserializer.DateSort.class)//(json使用)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")//(表单提交时起作用)
+    @JsonDeserialize(using = CustomJsonDeserializer.DateSort.class)//(json时起使用)
+    @JsonSerialize(using = CustomJsonSerializer.DateShort.class)//出参使用（格式化日期）
     private LocalDateTime startTime;
 
     /**
      * 结束时间
      */
     @JsonSerialize(using = CustomJsonSerializer.DateShort.class)//出参使用（格式化日期）
-    private String endTime;
+    private LocalDateTime endTime;
 }
