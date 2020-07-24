@@ -3,15 +3,9 @@ package hs.dcl.test.model.req;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import hs.dcl.test.common.Constant;
 import lombok.Data;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
-
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -22,6 +16,11 @@ import java.time.LocalDateTime;
 @Data
 public class ValidatedREQ implements Serializable {
 
+
+    @NotNull
+    @DecimalMin(value = "0", message = "授予价格最小是0！")
+    @Digits(message = "授予价格必须为正数！", integer = 10, fraction = 6)
+    private BigDecimal grantPrice;
 
     @NotBlank(message = "id集合必填")//message注解只作用在字符串上
     @Pattern(regexp = "(\\d+)(\\,\\d+)*", message = "多个id使用英文逗号分割")
@@ -34,11 +33,11 @@ public class ValidatedREQ implements Serializable {
     @Min(value = 10,message = "年龄最小为10")@Max(value = 100,message = "年龄最大为100")
     private Integer age;
 
-    @Email(message = "邮箱格式错误")
-    private  String email;
-
     @NotBlank(message = "手机号不能为空")//(不能是空格)
     private String mobile;
+
+    @Email(message = "邮箱格式错误")
+    private  String email;
 
     private String remarks;
 
