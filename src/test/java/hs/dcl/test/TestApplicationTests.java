@@ -74,4 +74,10 @@ class TestApplicationTests {
         System.out.println(exerciseAvgPrice);
     }
 
+    @Test
+    void adsa(){
+
+
+    }
+
 }

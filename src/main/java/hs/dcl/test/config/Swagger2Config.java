@@ -1,6 +1,5 @@
 package hs.dcl.test.config;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -26,7 +25,6 @@ import java.util.List;
 @Configuration
 @EnableSwagger2
 @EnableWebMvc
-@ConditionalOnExpression("'${swagger.enable}'=='true'")
 public class Swagger2Config extends WebMvcConfigurerAdapter {
     
     @Bean
