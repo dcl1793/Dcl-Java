@@ -85,16 +85,4 @@ public class GlobalExceptionHandler {
         }
         return Result.failed(ErrorEnum.PARAM_INVALID, msg + " 输入参数：" + input);
     }
-
-
-//    @ExceptionHandler
-//    @ResponseStatus(HttpStatus.OK)
-//    public Result handle(HttpMessageNotReadableException exception) {
-//        log.error(exception.toString());
-//        InvalidFormatException invalidFormatException = (InvalidFormatException) exception.getCause();
-//        //String StringtargetType = invalidFormatException.getTargetType().getTypeName();
-//        String fieldName = invalidFormatException.getPath().get(0).getFieldName();
-//        return Result.failed(ErrorEnum.PARAM_INVALID,fieldName+"格式不正确！");
-//    }
-
 }

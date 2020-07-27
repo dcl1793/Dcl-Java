@@ -1,5 +1,6 @@
 package hs.dcl.test.controller;
 
+import hs.dcl.test.model.dto.Validate7DTO;
 import hs.dcl.test.model.req.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -9,10 +10,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -134,5 +133,25 @@ public class ValidatedController {
     @RequestMapping(value = "/validate6", method = RequestMethod.GET)
     public void validate6(@Validated FlagValidat FlagValidat ) {
         FlagValidat.getFlag();
+    }
+
+    /**
+     * 自定义校验
+     */
+    @RequestMapping(value = "/validate7", method = RequestMethod.POST)
+    public void validate7(@Validated @RequestBody Validate7REQ validate7REQ ) {
+
+        String grantPrice = validate7REQ.getGrantPrice();
+        String times = validate7REQ.getTimes();
+        String totalNum = validate7REQ.getTotalNum();
+        String totalPerson = validate7REQ.getTotalPerson();
+
+        Validate7DTO validate7DTO = new Validate7DTO();
+        validate7DTO.setGrantPrice(new BigDecimal(grantPrice));
+        validate7DTO.setTotalNum(new BigDecimal(totalNum));
+        validate7DTO.setTimes(Integer.valueOf(times).intValue());
+        validate7DTO.setTotalPerson(Integer.valueOf(totalPerson).intValue());
+
+        System.out.println(validate7DTO);
     }
 }
