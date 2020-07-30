@@ -48,7 +48,7 @@ public class PageServiceImpl implements PageService {
             logger.error(e.getMessage());
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return Result.failed(ErrorEnum.OPERATION_ERROR);
+            return Result.failed(ErrorEnum.INTERNAL_ERROR,"失败！");
         }
     }
 
@@ -70,11 +70,10 @@ public class PageServiceImpl implements PageService {
         } catch (BaseBizException e) {
             logger.error(e.getMsg());
             e.printStackTrace();
-            Result result = new Result(ErrorEnum.SF_ERROR.code(), e.getMsg());
-            return result;
+            return Result.failed(ErrorEnum.INTERNAL_ERROR, e.getMsg());
 
         }
-        return new Result(ErrorEnum.PARAM_INVALID);
+        return Result.failed(ErrorEnum.INTERNAL_ERROR,"失败！");
     }
 
 }
