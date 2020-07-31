@@ -5,7 +5,6 @@ import hs.dcl.test.common.Result;
 import hs.dcl.test.dao.UserMapper;
 import hs.dcl.test.exception.BaseBizException;
 import hs.dcl.test.model.Page;
-import hs.dcl.test.model.User;
 import hs.dcl.test.service.PageService;
 import hs.dcl.test.util.PageHelper;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,7 +39,7 @@ public class PageServiceImpl implements PageService {
             Integer totalNum = userMapper.selectCountUser();
             PageHelper pageHelper = new PageHelper(page.getPage(), page.getRows());
             page.setPage((page.getPage() - 1)*page.getRows());
-            List<User> list = userMapper.selectUser(page);
+            List list =new ArrayList();
             pageHelper.setDataInfo(list);
             pageHelper.setTotalCount(totalNum);
             return Result.success(pageHelper);

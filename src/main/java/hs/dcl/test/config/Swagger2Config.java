@@ -26,11 +26,12 @@ import java.util.List;
 @EnableSwagger2
 @EnableWebMvc
 public class Swagger2Config extends WebMvcConfigurerAdapter {
-    
+
     @Bean
     public Docket api() {
-        
+
         ParameterBuilder parameterBuilder = new ParameterBuilder();
+        // 添加请求参数，我们这里把token作为请求头部参数传入后端
         parameterBuilder.name("Authorization").defaultValue("").description("用户令牌").modelRef(new ModelRef("string")).parameterType("header").required(false).build();
         List<Parameter> parameters = new ArrayList<>();
         parameters.add(parameterBuilder.build());
@@ -41,16 +42,16 @@ public class Swagger2Config extends WebMvcConfigurerAdapter {
                 .paths(PathSelectors.any())
                 .build();
     }
-    
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("swagger-ui.html")
                 .addResourceLocations("classpath:/META-INF/resources/");
-        
+
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
-    
+
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addRedirectViewController("/swagger-resources/configuration/ui", "ui");

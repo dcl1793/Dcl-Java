@@ -2,12 +2,9 @@ package hs.dcl.test.service.impl;
 
 import hs.dcl.test.common.Result;
 import hs.dcl.test.dao.IncentiveObjMapper;
-import hs.dcl.test.dao.UserMapper;
 import hs.dcl.test.model.IncentiveObj;
 import hs.dcl.test.model.Page;
-import hs.dcl.test.model.User;
 import hs.dcl.test.service.IncentiveObjService;
-import hs.dcl.test.util.PageHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

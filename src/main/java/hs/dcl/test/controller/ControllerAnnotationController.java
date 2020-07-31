@@ -1,6 +1,6 @@
 package hs.dcl.test.controller;
 
-import hs.dcl.test.model.User;
+import hs.dcl.test.model.po.User;
 import org.springframework.web.bind.annotation.*;
 
 /**

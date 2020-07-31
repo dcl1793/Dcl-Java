@@ -1,7 +1,7 @@
 package hs.dcl.test.dao;
 
 import hs.dcl.test.model.Page;
-import hs.dcl.test.model.User;
+import hs.dcl.test.model.po.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
