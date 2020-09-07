@@ -7,7 +7,6 @@ import hs.dcl.test.exception.BaseBizException;
 import hs.dcl.test.model.Page;
 import hs.dcl.test.service.PageService;
 import hs.dcl.test.util.PageHelper;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +52,7 @@ public class PageServiceImpl implements PageService {
     }
 
     @Override
-    public Result excepTest() {
+    public Result exceptTest() {
 
         return Result.success();
     }
@@ -62,7 +61,7 @@ public class PageServiceImpl implements PageService {
      * 自定义异常测试
      */
     @Override
-    public Result sfExcep() {
+    public Result sfexcepetion() {
         try {
             if (1 > 0) {
                 throw new BaseBizException("自定义异常");
@@ -75,5 +74,4 @@ public class PageServiceImpl implements PageService {
         }
         return Result.failed(ErrorEnum.INTERNAL_ERROR,"失败！");
     }
-
 }

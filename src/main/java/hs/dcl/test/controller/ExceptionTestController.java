@@ -1,7 +1,6 @@
 package hs.dcl.test.controller;
 
 import hs.dcl.test.common.Result;
-import hs.dcl.test.model.Page;
 import hs.dcl.test.service.PageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +27,7 @@ public class ExceptionTestController {
      */
     @RequestMapping(value = "/test1", method = RequestMethod.GET)
     public Result excepTest()  {
-        Result result = pageService.excepTest();
+        Result result = pageService.exceptTest();
         return result;
     }
 
@@ -37,7 +36,7 @@ public class ExceptionTestController {
      */
     @RequestMapping(value = "/test2", method = RequestMethod.GET)
     public Result sfExcep()  {
-        Result result = pageService.sfExcep();
+        Result result = pageService.sfexcepetion();
         return result;
     }
 }

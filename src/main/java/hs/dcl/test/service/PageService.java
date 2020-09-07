@@ -11,12 +11,24 @@ public interface PageService {
 
     /**
      * 获取人员详情
-     * @param page
-     * @return
+     *
+     * @param page 分页
+     * @return Result
      */
     Result getPersonDetail(Page page);
 
-    Result excepTest();
+    /**
+     * 获取人员详情
+     *
+     * @return Result
+     */
+    Result exceptTest();
 
-    Result sfExcep();
+    /**
+     * 获取人员详情
+     *
+     * @return Result
+     */
+    Result sfexcepetion();
+
 }

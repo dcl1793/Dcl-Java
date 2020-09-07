@@ -1,5 +1,6 @@
 package hs.dcl.test.controller;
 
+import hs.dcl.test.controller.easypoi.OfficeExportUtil;
 import hs.dcl.test.model.Person;
 import hs.dcl.test.util.ExcelUtils;
 import org.slf4j.Logger;
@@ -38,7 +39,10 @@ public class ExceleTestController {
         }
         StringBuffer sheetName = new StringBuffer("员工信息");
         String fileName = new String(sheetName);
-        ExcelUtils.exportExcel(personList, "员工信息表", "员工信息", Person.class, fileName, response);
+        //ExcelUtils.exportExcel(personList, "员工信息表", "员工信息", Person.class, fileName, response);
+        //导出excel
+        OfficeExportUtil.exportExcel(OfficeExportUtil.getWorkbook(null, "页签名", Person.class, personList), "导出文件名", response);
+
         logger.info("导出excel所花时间：" + (System.currentTimeMillis() - start));
     }
 

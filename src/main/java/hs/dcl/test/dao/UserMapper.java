@@ -1,10 +1,6 @@
 package hs.dcl.test.dao;
 
-import hs.dcl.test.model.Page;
-import hs.dcl.test.model.po.User;
 import org.springframework.stereotype.Repository;
-
-import java.util.List;
 
 /**
  * @author dacl30868
@@ -13,7 +9,10 @@ import java.util.List;
 @Repository
 public interface UserMapper {
 
-    List<User> selectUser(Page page);
-
+    /**
+     * 统计
+     * @return Integer
+     */
     Integer selectCountUser();
+
 }
