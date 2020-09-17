@@ -1,6 +1,6 @@
 package hs.dcl.test.service;
 
-import hs.dcl.test.common.Result;
+import hs.dcl.test.common.ResultBody;
 import hs.dcl.test.model.Page;
 
 /**
@@ -8,5 +8,5 @@ import hs.dcl.test.model.Page;
  * @date 2020/6/21 15:18
  */
 public interface IncentiveObjService {
-    Result getPersonDetail(Page page);
+    ResultBody getPersonDetail(Page page);
 }

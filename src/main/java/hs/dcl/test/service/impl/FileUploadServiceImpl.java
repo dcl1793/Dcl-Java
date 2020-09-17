@@ -1,16 +1,14 @@
 package hs.dcl.test.service.impl;
 
-import hs.dcl.test.common.ErrorEnum;
-import hs.dcl.test.common.Result;
+import hs.dcl.test.common.CommonEnum;
+import hs.dcl.test.common.ResultBody;
 import hs.dcl.test.service.FileUploadService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.util.List;
 
 /**
  * @author dacl30868
@@ -25,7 +23,7 @@ public class FileUploadServiceImpl implements FileUploadService {
     private String fileUrl;
 
     @Override
-    public Result fileupload(MultipartFile file) {
+    public ResultBody fileupload(MultipartFile file) {
 
 
         String fileName = file.getOriginalFilename();
@@ -52,8 +50,8 @@ public class FileUploadServiceImpl implements FileUploadService {
 
         } catch (Exception e) {
             log.error("上传失败", e);
-            return Result.failed(ErrorEnum.OPERATION_FAILED, "上传失败！");
+            return hs.dcl.test.common.ResultBody.failed(CommonEnum.INTERNAL_SERVER_ERROR, "上传失败！");
         }
-        return Result.success();
+        return ResultBody.success();
     }
 }

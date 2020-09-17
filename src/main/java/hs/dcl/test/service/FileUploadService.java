@@ -1,6 +1,6 @@
 package hs.dcl.test.service;
 
-import hs.dcl.test.common.Result;
+import hs.dcl.test.common.ResultBody;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -9,5 +9,5 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public interface FileUploadService {
 
-    Result fileupload(MultipartFile file);
+    ResultBody fileupload(MultipartFile file);
 }

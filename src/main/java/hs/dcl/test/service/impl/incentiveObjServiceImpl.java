@@ -1,6 +1,6 @@
 package hs.dcl.test.service.impl;
 
-import hs.dcl.test.common.Result;
+import hs.dcl.test.common.ResultBody;
 import hs.dcl.test.dao.IncentiveObjMapper;
 import hs.dcl.test.model.IncentiveObj;
 import hs.dcl.test.model.Page;
@@ -9,8 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * @author dacl30868
@@ -25,9 +23,9 @@ public class incentiveObjServiceImpl implements IncentiveObjService {
     private IncentiveObjMapper incentiveObjMapper;
 
     @Override
-    public Result getPersonDetail(Page page) {
+    public ResultBody getPersonDetail(Page page) {
 
         IncentiveObj incentiveObjs = incentiveObjMapper.selectAll();
-        return Result.success(incentiveObjs);
+        return hs.dcl.test.common.ResultBody.success(incentiveObjs);
     }
 }

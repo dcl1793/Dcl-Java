@@ -10,14 +10,8 @@ import java.util.Set;
 public class genericTest {
 
     @Test
-    void Pair() {
-
-        Set a = new HashSet();
-        a.add(1);
-        a.add(1);
-        a.add(2);
-        a.add(2);
-        a.add(3);
-        System.out.println(a);
+    void Pair11() {
+        Object o = new Object();
+        System.out.println(o);
     }
 }

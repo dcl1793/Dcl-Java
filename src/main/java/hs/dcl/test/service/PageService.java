@@ -1,6 +1,6 @@
 package hs.dcl.test.service;
 
-import hs.dcl.test.common.Result;
+import hs.dcl.test.common.ResultBody;
 import hs.dcl.test.model.Page;
 
 /**
@@ -15,20 +15,20 @@ public interface PageService {
      * @param page 分页
      * @return Result
      */
-    Result getPersonDetail(Page page);
+    ResultBody getPersonDetail(Page page);
 
     /**
      * 获取人员详情
      *
      * @return Result
      */
-    Result exceptTest();
+    ResultBody exceptTest();
 
     /**
      * 获取人员详情
      *
      * @return Result
      */
-    Result sfexcepetion();
+    ResultBody sfexcepetion();
 
 }

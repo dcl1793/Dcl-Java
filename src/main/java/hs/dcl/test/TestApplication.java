@@ -20,32 +20,4 @@ public class TestApplication {
         SpringApplication.run(TestApplication.class, args);
 
     }
-//
-//    @Bean
-//    public TomcatServletWebServerFactory tomcatEmbedded() {
-//        TomcatServletWebServerFactory  tomcat = new TomcatServletWebServerFactory();
-//        tomcat.addConnectorCustomizers( (TomcatConnectorCustomizer) connector -> {
-//            if ((connector.getProtocolHandler() instanceof AbstractHttp11Protocol<?>)) {
-//                ((AbstractHttp11Protocol<?>) connector.getProtocolHandler()).setMaxSwallowSize(-1);
-//                System.out.println("9999999999999999999999999999999999999999999999999");
-//            }else {
-//                System.out.println("888888888888888888888888888888888888888888888");
-//            }
-//        });
-//        return tomcat;
-//    }
-
-//    @Bean
-//    public TomcatEmbeddedServletContainerFactory  tomcatEmbedded(){
-//
-//        TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
-//        tomcat.addConnectorCustomizers((TomcatConnectorCustomizer) connector -> {
-//            if ((connector.getProtocolHandler() instanceof AbstractHttp11Protocol<?>)) {
-//                ((AbstractHttp11Protocol<?>)
-//                        connector.getProtocolHandler()).setMaxSwallowSize(-1);
-//            }
-//        });
-//        return tomcat;
-//    }
-
 }

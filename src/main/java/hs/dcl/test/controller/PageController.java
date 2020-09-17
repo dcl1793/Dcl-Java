@@ -1,6 +1,6 @@
 package hs.dcl.test.controller;
 
-import hs.dcl.test.common.Result;
+import hs.dcl.test.common.ResultBody;
 import hs.dcl.test.model.Page;
 import hs.dcl.test.service.PageService;
 import org.slf4j.Logger;
@@ -24,8 +24,15 @@ public class PageController {
     private PageService pageService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public Result pageTest(Page page)  {
-        Result result = pageService.getPersonDetail(page);
-        return result;
+    public ResultBody pageTest(Page page)  {
+        ResultBody resultBody = pageService.getPersonDetail(page);
+        return resultBody;
+    }
+
+
+    @RequestMapping(value = "/sfexcepetion", method = RequestMethod.GET)
+    public ResultBody sfexcepetion()  {
+        ResultBody sfexcepetion = pageService.sfexcepetion();
+        return sfexcepetion;
     }
 }

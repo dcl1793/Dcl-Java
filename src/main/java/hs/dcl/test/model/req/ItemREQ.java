@@ -17,7 +17,7 @@ import java.util.List;
 @Data
 public class ItemREQ implements Serializable {
 
-        //@NotNull(message = "id不能为空")
+        @NotNull(message = "id不能为空")
         @Min(value = 1, message = "id必须为正整数")
         private Long id;
 

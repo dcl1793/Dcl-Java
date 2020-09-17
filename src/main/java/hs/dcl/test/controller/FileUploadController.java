@@ -1,10 +1,9 @@
 package hs.dcl.test.controller;
 
-import hs.dcl.test.common.Result;
+import hs.dcl.test.common.ResultBody;
 import hs.dcl.test.service.FileUploadService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +28,7 @@ public class FileUploadController {
      */
     @ApiOperation(value = "上传文档", notes = "上传文档")
     @RequestMapping(value = "/uploads", method = RequestMethod.POST)
-    public Result uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResultBody uploadFile(@RequestParam("file") MultipartFile file) {
         return fileUploadService.fileupload(file);
     }
 }

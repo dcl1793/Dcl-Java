@@ -1,7 +1,7 @@
 package hs.dcl.test.service.impl;
 
-import hs.dcl.test.common.ErrorEnum;
-import hs.dcl.test.common.Result;
+import hs.dcl.test.common.CommonEnum;
+import hs.dcl.test.common.ResultBody;
 import hs.dcl.test.dao.UserMapper;
 import hs.dcl.test.exception.BaseBizException;
 import hs.dcl.test.model.Page;
@@ -31,7 +31,7 @@ public class PageServiceImpl implements PageService {
 
     @Override
     @Transactional(rollbackFor = {Exception.class, Error.class})
-    public Result getPersonDetail(Page page) throws BaseBizException {
+    public ResultBody getPersonDetail(Page page) throws BaseBizException {
 
         try {
 
@@ -41,27 +41,27 @@ public class PageServiceImpl implements PageService {
             List list =new ArrayList();
             pageHelper.setDataInfo(list);
             pageHelper.setTotalCount(totalNum);
-            return Result.success(pageHelper);
+            return hs.dcl.test.common.ResultBody.success(pageHelper);
 
         }catch (Exception e) {
             logger.error(e.getMessage());
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return Result.failed(ErrorEnum.INTERNAL_ERROR,"失败！");
+            return hs.dcl.test.common.ResultBody.failed(CommonEnum.BODY_NOT_MATCH,"失败！");
         }
     }
 
     @Override
-    public Result exceptTest() {
+    public ResultBody exceptTest() {
 
-        return Result.success();
+        return ResultBody.success();
     }
 
     /**
      * 自定义异常测试
      */
     @Override
-    public Result sfexcepetion() {
+    public ResultBody sfexcepetion() {
         try {
             if (1 > 0) {
                 throw new BaseBizException("自定义异常");
@@ -69,9 +69,9 @@ public class PageServiceImpl implements PageService {
         } catch (BaseBizException e) {
             logger.error(e.getMsg());
             e.printStackTrace();
-            return Result.failed(ErrorEnum.INTERNAL_ERROR, e.getMsg());
+            return hs.dcl.test.common.ResultBody.failed(CommonEnum.INTERNAL_SERVER_ERROR, e.getMsg());
 
         }
-        return Result.failed(ErrorEnum.INTERNAL_ERROR,"失败！");
+        return hs.dcl.test.common.ResultBody.failed(CommonEnum.INTERNAL_SERVER_ERROR,"失败！");
     }
 }

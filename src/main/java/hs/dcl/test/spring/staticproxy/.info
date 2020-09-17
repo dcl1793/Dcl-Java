@@ -1,0 +1,59 @@
+代理模式
+参考博客：https://www.cnblogs.com/liantdev/p/10132680.html
+
+为什么会有面向切面编程（AOP）？
+
+    我们知道java是一个面向对象(OOP)的语言，但它有一些弊端：
+    比如当我们需要为多个不具有继承关系的对象引入一个公共行为，例如日志,权限验证,事务等功能时，
+    只能在在每个对象里引用公共行为，这样做不便于维护，而且有大量重复代码。AOP的出现弥补了OOP的这点不足。
+
+    Spring AOP的主要作用就是不通过修改源代码的方式、将非核心功能代码织入来实现对方法的增强。
+    那么Spring AOP的底层如何实现对方法的增强？实现的关键在于使用了代理模式
+    代理模式的作用就是为其它对象提供一种代理，以控制对这个对象的访问，用于解决在直接访问对象时带来的各种问题。
+    代理主要分为两种方式：静态代理和动态代理
+
+    AOP让你可以使用简单可插拔的配置，在实际逻辑执行之前、之后或周围动态添加横切关注点。这让代码在当下和将来都变得易于维护。如果你是使用XML来使用切面的话，要添加或删除关注点，你不用重新编译完整的源代码，而仅仅需要修改配置文件就可以了。
+    Spring AOP通过以下两种方式来使用。但是最广泛使用的方式是Spring AspectJ 注解风格(Spring AspectJ Annotation Style)
+
+    使用AspectJ 注解风格
+    使用Spring XML 配置风格
+
+静态代理
+    静态代理主要通过将目标类与代理类实现同一个接口，让代理类持有真实类对象，
+    然后在代理类方法中调用真实类方法，在调用真实类方法的前后添加我们所需要的功能扩展代码来达到增强的目的
+
+    通过以上的代码示例，我们不难发现静态代理的缺点。假如我们的Subject接口要增加其它的方法，
+    则ProxySubject代理类也必须同时代理这些新增的方法。同时我们也看到，
+    request方法和response方法所织入的代码是一样的，这会使得代理类中出现大量冗余的代码，
+    非常不利于扩展和维护。为了解决静态代理的这些缺陷，于是有了动态代理
+
+动态代理
+    与静态代理相比，动态代理的代理类不需要程序员自己手动定义，而是在程序运行时动态生成
+    动态代理可以分为JDK动态代理和CgLib动态代理
+
+1.JDK动态代理
+    JDK动态代理与静态代理一样，目标类需要实现一个代理接口，它的开发步骤如下：
+    1.定义一个java.lang.reflect.InvocationHandler接口的实现类，重写invoke方法
+    2.将InvocationHandler对象作为参数传入java.lang.reflect.Proxy的newProxyInstance方法中
+    3.通过调用java.lang.reflect.Proxy的newProxyInstance方法获得动态代理对象
+    4.通过代理对象调用目标方法
+    示例代码： JdkProxySubject.java
+
+2.CgLib动态代理
+    CgLib动态代理的原理是对指定的业务类生成一个子类，并覆盖其中的业务方法来实现代理。它的开发步骤：
+    1.定义一个org.springframework.cglib.proxy.MethodInterceptor接口的实现类，重写intercept方法
+    2.获取org.springframework.cglib.proxy.Enhancer类的对象
+    3.分别调用Enhancer对象的setSuperclass和setCallback方法，使用create方法获取代理对象
+    4.通过代理对象调用目标方法
+    示例代码：MyMethodInterceptor.java
+
+3.两种代理的区别
+    JDK动态代理和CgLib动态代理的主要区别：
+    JDK动态代理只能针对实现了接口的类的接口方法进行代理
+    CgLib动态代理基于继承来实现代理，所以无法对final类、private方法和static方法实现代理
+
+    Spring AOP的代理
+    Spring AOP中的代理使用的默认策略是：
+    如果目标对象实现了接口，则默认采用JDK动态代理
+    如果目标对象没有实现接口，则采用CgLib进行动态代理
+    如果目标对象实现了接口，且强制CgLib代理，则采用CgLib进行动态代理

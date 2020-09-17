@@ -3,13 +3,9 @@ package hs.dcl.test.controller;
 import hs.dcl.test.model.dto.Validate7DTO;
 import hs.dcl.test.model.req.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.List;

@@ -3,9 +3,9 @@
 <mapper namespace="hs.dcl.test.dao.UserMapper">
 
     <resultMap id="UserInfo" type="hs.dcl.test.model.po.User">
-        <result column="id" jdbcType="BIGINT" property="id"/>
-        <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="age" jdbcType="INTEGER" property="age"/>
+        <resultBody column="id" jdbcType="BIGINT" property="id"/>
+        <resultBody column="name" jdbcType="VARCHAR" property="name"/>
+        <resultBody column="age" jdbcType="INTEGER" property="age"/>
     </resultMap>
 
     <select id="selectUser"  resultMap="UserInfo">
