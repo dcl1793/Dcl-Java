@@ -44,6 +44,19 @@ public class ResultBody implements Serializable {
     }
 
     /**
+     * @param commonEnum 成功提示
+     * @param msg       具体成功提示
+     */
+    public static ResultBody success(CommonEnum commonEnum, String msg) {
+        ResultBody resultBody = new ResultBody();
+        resultBody.setCode(commonEnum.code());
+        resultBody.setMessage(commonEnum.msg() + " : " + msg);
+        resultBody.setData("");
+        resultBody.setTime(System.currentTimeMillis());
+        return resultBody;
+    }
+
+    /**
      * @param commonEnum 失败原因
      * @param msg       具体失败原因 最好提示用户如何改正
      */

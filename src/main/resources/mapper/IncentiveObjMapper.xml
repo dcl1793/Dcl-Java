@@ -4,32 +4,32 @@
 
     <resultMap id="BaseResultMap" type="hs.dcl.test.model.IncentiveObj" >
         <id column="object_id" property="objectId" jdbcType="INTEGER" />
-        <resultBody column="object_name" property="objectName" jdbcType="VARCHAR" />
-        <resultBody column="mobile_tel" property="mobileTel" jdbcType="VARCHAR" />
-        <resultBody column="email" property="email" jdbcType="VARCHAR" />
-        <resultBody column="cre_type" property="creType" jdbcType="VARCHAR" />
-        <resultBody column="cre_no" property="creNo" jdbcType="VARCHAR" />
-        <resultBody column="employee_id" property="employeeId" jdbcType="INTEGER" />
-        <resultBody column="fund_account" property="fundAccount" jdbcType="VARCHAR" />
-        <resultBody column="sha_account" property="shaAccount" jdbcType="VARCHAR" />
-        <resultBody column="resident_status" property="residentStatus" jdbcType="CHAR" />
-        <resultBody column="account_status" property="accountStatus" jdbcType="CHAR" />
-        <resultBody column="employee_type" property="employeeType" jdbcType="VARCHAR" />
-        <resultBody column="audit_status" property="auditStatus" jdbcType="CHAR" />
-        <resultBody column="branch_no" property="branchNo" jdbcType="INTEGER" />
-        <resultBody column="branch_name" property="branchName" jdbcType="VARCHAR" />
-        <resultBody column="online_status" property="onlineStatus" jdbcType="CHAR" />
-        <resultBody column="depository_bank_no" property="depositoryBankNo" jdbcType="VARCHAR" />
-        <resultBody column="depository_bank" property="depositoryBank" jdbcType="VARCHAR" />
-        <resultBody column="retrustee_status" property="retrusteeStatus" jdbcType="CHAR" />
-        <resultBody column="revoke_status" property="revokeStatus" jdbcType="CHAR" />
-        <resultBody column="changeable_status" property="changeableStatus" jdbcType="CHAR" />
-        <resultBody column="deal_bond_status" property="dealBondStatus" jdbcType="CHAR" />
-        <resultBody column="org_id" property="orgId" jdbcType="VARCHAR" />
-        <resultBody column="crea_time" property="creaTime" jdbcType="TIMESTAMP" />
-        <resultBody column="upda_time" property="updaTime" jdbcType="TIMESTAMP" />
-        <resultBody column="last_modifier" property="lastModifier" jdbcType="INTEGER" />
-        <resultBody column="creator_id" property="creatorId" jdbcType="INTEGER" />
+        <result column="object_name" property="objectName" jdbcType="VARCHAR" />
+        <result column="mobile_tel" property="mobileTel" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="cre_type" property="creType" jdbcType="VARCHAR" />
+        <result column="cre_no" property="creNo" jdbcType="VARCHAR" />
+        <result column="employee_id" property="employeeId" jdbcType="INTEGER" />
+        <result column="fund_account" property="fundAccount" jdbcType="VARCHAR" />
+        <result column="sha_account" property="shaAccount" jdbcType="VARCHAR" />
+        <result column="resident_status" property="residentStatus" jdbcType="CHAR" />
+        <result column="account_status" property="accountStatus" jdbcType="CHAR" />
+        <result column="employee_type" property="employeeType" jdbcType="VARCHAR" />
+        <result column="audit_status" property="auditStatus" jdbcType="CHAR" />
+        <result column="branch_no" property="branchNo" jdbcType="INTEGER" />
+        <result column="branch_name" property="branchName" jdbcType="VARCHAR" />
+        <result column="online_status" property="onlineStatus" jdbcType="CHAR" />
+        <result column="depository_bank_no" property="depositoryBankNo" jdbcType="VARCHAR" />
+        <result column="depository_bank" property="depositoryBank" jdbcType="VARCHAR" />
+        <result column="retrustee_status" property="retrusteeStatus" jdbcType="CHAR" />
+        <result column="revoke_status" property="revokeStatus" jdbcType="CHAR" />
+        <result column="changeable_status" property="changeableStatus" jdbcType="CHAR" />
+        <result column="deal_bond_status" property="dealBondStatus" jdbcType="CHAR" />
+        <result column="org_id" property="orgId" jdbcType="VARCHAR" />
+        <result column="crea_time" property="creaTime" jdbcType="TIMESTAMP" />
+        <result column="upda_time" property="updaTime" jdbcType="TIMESTAMP" />
+        <result column="last_modifier" property="lastModifier" jdbcType="INTEGER" />
+        <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
     </resultMap>
 
     <sql id="Example_Where_Clause" >

@@ -16,6 +16,7 @@ import java.util.Date;
  */
 @NoArgsConstructor
 public class CustomJsonSerializer {
+
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
