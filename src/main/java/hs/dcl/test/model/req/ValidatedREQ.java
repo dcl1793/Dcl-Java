@@ -26,6 +26,14 @@ public class ValidatedREQ implements Serializable {
     @Pattern(regexp = "(\\d+)(\\,\\d+)*", message = "多个id使用英文逗号分割")
     private String ids;
 
+    /**
+     * 总数量
+     */
+    @org.hibernate.validator.constraints.NotBlank
+    @Pattern(regexp = "^([1-9]\\d*|0)(\\.(\\d){0,4})?$", message = "总数量必须是非负数，整数位最多10位，小数位最多4位！")
+    @Digits(message = "总数量整数位最多10位,小数位最多4位！", integer = 10, fraction = 4)
+    private String totalNum;
+
     @Size(min = 1,max = 10,message = "姓名长度必须为1到10")
     @NotEmpty(message = "名称必填")//(可以是空格)
     private String name;
