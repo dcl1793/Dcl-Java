@@ -8,11 +8,17 @@
         <result column="age" jdbcType="INTEGER" property="age"/>
     </resultMap>
 
-    <select id="selectUser"  resultMap="UserInfo">
-       SELECT id, name , age FROM test_poi  limit #{page}, #{rows}
-    </select>
-
     <select id="selectCountUser"  resultType="int">
        SELECT count(*) FROM test_poi
+    </select>
+
+    <select id="selectById" resultType="java.lang.String" databaseId="oracle">
+        SELECT USERNAME FROM USERINFO  WHERE USERID = '6XpucgZ0'
+
+    </select>
+
+    <select id="selectById" resultType="java.lang.String" databaseId="mysql">
+        SELECT USERNAME FROM USERINFO  WHERE USERID = "6XpucgZ0"
+
     </select>
 </mapper>

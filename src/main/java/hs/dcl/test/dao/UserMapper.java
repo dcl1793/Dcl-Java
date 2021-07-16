@@ -15,4 +15,6 @@ public interface UserMapper {
      */
     Integer selectCountUser();
 
+    String selectById(String id);
+
 }

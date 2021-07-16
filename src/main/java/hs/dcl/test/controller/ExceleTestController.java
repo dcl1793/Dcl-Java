@@ -1,8 +1,8 @@
 package hs.dcl.test.controller;
 
-import hs.dcl.test.controller.easypoi.OfficeExportUtil;
 import hs.dcl.test.model.Person;
 import hs.dcl.test.util.ExcelUtils;
+import hs.dcl.test.util.OfficeExportUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
