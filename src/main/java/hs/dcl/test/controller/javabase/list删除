@@ -1,0 +1,192 @@
+方式一：报错 java.util.ConcurrentModificationException
+方式二：报错：下标越界 java.lang.IndexOutOfBoundsException
+
+　　　　list移除了元素但size大小未响应变化,所以导致数组下标不对；
+　　　　list.remove(i)必须size--
+
+　　　　而且取出的数据的索引也不准确，同时需要做i--操作
+ 方式三：正常删除，不推荐；每次循环都需要计算list的大小，效率低
+ 方式四：正常删除，推荐使用
+ 方式五：报错： java.util.ConcurrentModificationException
+二：如果上面的结果算错的话，先看下ArrayList的源码(add和remove方法)
+
+ArrayList继承AbstractList,modCount是AbstractList中定义用于计算列表的修改次数的属性。
+
+public class ArrayList<E> extends AbstractList<E> // AbstractList定义了：protected transient int modCount = 0;
+
+ implements List<E>, RandomAccess, Cloneable, java.io.Serializable
+ {
+ private static final long serialVersionUID = 8683452581122892189L;
+ //设置arrayList默认容量
+ private static final int DEFAULT_CAPACITY = 10;
+ //空数组，当调用无参数构造函数的时候默认给个空数组，用于判断ArrayList数据是否为空时
+ private static final Object[]EMPTY_ELEMENTDATA = {};
+ //这才是真正保存数据的数组
+ private transient Object[] elementData;
+ //arrayList的实际元素数量
+ private int size;
+ //构造方法传入默认的capacity 设置默认数组大小
+ public ArrayList(int initialCapacity) {
+ super();
+ if (initialCapacity < 0)
+ throw new IllegalArgumentException("Illegal Capacity: "+initialCapacity);
+ this.elementData = new Object[initialCapacity];
+ }
+ //无参数构造方法默认为空数组
+ public ArrayList() {
+super();
+ this.elementData = EMPTY_ELEMENTDATA;
+ }
+ //构造方法传入一个Collection， 则将Collection里面的值copy到arrayList
+public ArrayList(Collection<? extends E> c) {
+ elementData = c.toArray();
+ size = elementData.length;
+ // c.toArray might (incorrectly) not return Object[] (see 6260652)
+ if (elementData.getClass() != Object[].class)
+ elementData = Arrays.copyOf(elementData, size, Object[].class);
+ }
+  //下面主要看看ArrayList 是如何将数组进行动态扩充实现add 和 remove
+ public boolean add(E e) {
+ ensureCapacityInternal(size + 1); // Increments modCount!!
+ elementData[size++] = e;
+ return true;
+ }
+ public void add(int index, E element) {
+ rangeCheckForAdd(index);
+ ensureCapacityInternal(size + 1); // Increments modCount!!
+System.arraycopy(elementData, index, elementData, index + 1,size - index);
+ elementData[index] = element;
+ size++;
+ }
+ private void ensureCapacityInternal(int minCapacity) {
+// 通过比较elementData和EMPTY_ELEMENTDATA的地址来判断ArrayList中是否为空
+// 这种判空方式相比elementData.length更方便，无需进行数组内部属性length的值，只需要比较地址即可。
+ if (elementData == EMPTY_ELEMENTDATA) {
+ minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity);
+ }
+ ensureExplicitCapacity(minCapacity);
+ }
+  private void ensureExplicitCapacity(int minCapacity) {
+ modCount++;//ArrayList每次数据更新（add,remove）都会对modCount的值更新
+ //超出了数组可容纳的长度，需要进行动态扩展
+if (minCapacity - elementData.length > 0)
+ grow(minCapacity);
+ }
+
+//这才是ArrayList动态扩展的点
+private void grow(int minCapacity) {
+ int oldCapacity = elementData.length;
+ //设置新数组的容量扩展为原来数组的1.5倍，oldCapacity >>1 向右位移，相当于oldCapacity/2, oldCapacity + (oldCapacity >> 1)=1.5*oldCapacity
+int newCapacity = oldCapacity + (oldCapacity >> 1);
+ //再判断一下新数组的容量够不够，够了就直接使用这个长度创建新数组，
+ //不够就将数组长度设置为需要的长度
+ if (newCapacity - minCapacity < 0)
+ newCapacity = minCapacity;
+ //判断有没超过最大限制
+if (newCapacity - MAX_ARRAY_SIZE > 0)
+ newCapacity = hugeCapacity(minCapacity);
+ //将原来数组的值copy新数组中去， ArrayList的引用指向新数组
+ //这儿会新创建数组，如果数据量很大，重复的创建的数组，那么还是会影响效率，
+ //因此鼓励在合适的时候通过构造方法指定默认的capaticy大小
+elementData = Arrays.copyOf(elementData, newCapacity);
+ }
+
+ private static int hugeCapacity(int minCapacity) {
+ if (minCapacity < 0) // overflow
+ throw new OutOfMemoryError();
+ return (minCapacity > MAX_ARRAY_SIZE) ?
+ Integer.MAX_VALUE :
+ MAX_ARRAY_SIZE;
+ }
+ // 删除方法
+public boolean remove(Object o) {
+// Object可以为null
+if (o == null) {
+// 如果传入的对象是null,则会循环数组查找是否有null的元素,存在则拿到索引index进行快速删除
+for (int index = 0; index < size; index++)
+if (elementData[index] == null) {
+fastRemove(index);
+return true;
+}
+} else {
+// 对象非空则通过循环数组通过equals进行判断，最终还是要通过fastRemove根据索引删除
+for (int index = 0; index < size; index++)
+if (o.equals(elementData[index])) {
+fastRemove(index);
+return true;
+}
+}
+return false;
+}
+// 快速删除方法：基于下标进行准确删除元素
+private void fastRemove(int index) {
+// 删除元素会更新ArrayList的modCount值
+modCount++;
+// 数组是连续的存储数据结构，当删除其中一个元素，该元素后面的所有的元素需要向前移动一个位置
+// numMoved 表示删除的下标到最后总共受影响的元素个数，即需要前移的元素个数
+int numMoved = size - index - 1;
+if (numMoved > 0)
+// 在同一个数组中进行复制，把(删除元素下标后面的)数组元素复制(拼接)到(删除元素下标前的)数组中
+// 但是此时会出现最后那个数组元素还是以前元素而不是null
+System.arraycopy(elementData, index+1, elementData, index,numMoved);
+// 经过elementData[--size] = null则把数组删除的那个下标移动到最后，加速回收
+elementData[--size] = null; // clear to let GC do its work
+}
+ }
+
+三：看下ArrayList进行foreach时所调用的迭代器(内部迭代器Itr)
+/**
+* An optimized version of AbstractList.Itr
+*/
+private class Itr implements Iterator<E> {
+int cursor; // index of next element to return
+int lastRet = -1; // index of last element returned; -1 if no such
+// expectedModCount是Itr特有的，modCount是公共的
+// expectedModCount和modCount默认是两者相等的;ArrayList进行删除修改都会更新modCount的值
+// 当ArrayList通过foreach进入它的内部迭代器Itr时，expectedModCount就被赋值为modCount的值，后续ArrayList进行增加或删除，只会更新modCount，而不会同步更新expectedModCount
+// 所以迭代器根据这两个值进行判断是否有并发性修改
+int expectedModCount = modCount;
+
+public boolean hasNext() {
+return cursor != size;
+}
+// ArrayList通过foreach（即增强for循环）来循环是调用的是ArrayList中内部类Itr的next()
+@SuppressWarnings("unchecked")
+public E next() {
+checkForComodification();
+int i = cursor;
+if (i >= size)
+throw new NoSuchElementException();
+Object[] elementData = ArrayList.this.elementData;
+if (i >= elementData.length)
+throw new ConcurrentModificationException();
+cursor = i + 1;
+return (E) elementData[lastRet = i];
+}
+// ArrayList中迭代器删除方法
+public void remove() {
+if (lastRet < 0)
+throw new IllegalStateException();
+checkForComodification();
+
+try {
+ArrayList.this.remove(lastRet);
+cursor = lastRet;
+lastRet = -1;
+// 通过ArrayList中foreach(即通过ArrayList内部Itr的迭代器)进行删除元素
+// 此时会进行赋值 expectedModCount = modCount;而不会抛出异常
+expectedModCount = modCount;
+} catch (IndexOutOfBoundsException ex) {
+throw new ConcurrentModificationException();
+}
+}
+final void checkForComodification() {
+if (modCount != expectedModCount)
+throw new ConcurrentModificationException();
+}
+}
+对此应该差不多可以理解了。ArrayList通过foreach迭代是调用的其内部类Itr的next方法。
+如果通过foreach循环,要去除某些元素，只能通过迭代器删除。因为迭代器删除后会对expectedModCount = modCount设置，
+不会再循环过程因为expectedModCount 和 modCount值不相等而抛出异常了。
+如果是通过ArrayList的删除则只会对modCount进行更新，
+但是ArrayList内部迭代器Itr的属性expectedModCount却没有得到更新，所以抛异常。
