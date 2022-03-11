@@ -10,7 +10,7 @@ import java.time.Instant;
  * @date 2018/12/26 下午 5:12
  */
 public class MavenClean {
-    private static final String PATH = "E:\\maven1\\repository";
+    private static final String PATH = "E:\\maven\\repository";
     private static long total;
     private static long time;
 

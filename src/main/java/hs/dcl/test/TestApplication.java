@@ -11,7 +11,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import java.util.Properties;
 
 @SpringBootApplication
-@MapperScan("hs.dcl.test.dao")
+@MapperScan({"hs.dcl.test.generator.mapper","hs.dcl.test.dao"})
 @EnableSwagger2
 public class TestApplication {
 
