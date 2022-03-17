@@ -23,6 +23,13 @@ public class TestRollbackServiceImpl implements TestRollbackService {
         QueryWrapper querywrapper = new QueryWrapper();
         querywrapper.eq("id", new Long(1));
         Student one = studentService.getOne(querywrapper);
+        System.out.println(one.toString());
+
+        Student studentForInsert = new Student();
+        studentForInsert.setId(new Long(1));
+        studentForInsert.setName("测试1");
+        studentService.updateById(studentForInsert);
+
         try{
             testTransactionService.test2();
         }catch(Exception e){
