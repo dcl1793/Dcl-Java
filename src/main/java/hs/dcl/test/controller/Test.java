@@ -10,11 +10,8 @@ import java.util.concurrent.TimeUnit;
 public class Test {
     public static void main(String[] args) {
 
-        BigDecimal thousand=new BigDecimal(1000);
-        BigDecimal countMao = new BigDecimal(100);
-        BigDecimal divide = countMao.divide(thousand, 3, BigDecimal.ROUND_HALF_UP);
-        System.out.println(divide);
-
-
+        String  a = "2022-20151";
+        String substring = a.substring(0, 4);
+        System.out.println(substring);
     }
 }
